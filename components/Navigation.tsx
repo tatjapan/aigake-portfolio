@@ -1,8 +1,11 @@
 'use client'
 import React from 'react'
+import dynamic from 'next/dynamic'
 import { BtnList } from '@/app/data'
-import NavButton from './NavButton';
 
+
+// x,y軸の計算をサーバーではなくクライアント側で完結させるため、NavButton をクライアントサイド専用にする
+const NavButton = dynamic(() => import('./NavButton'), { ssr: false });
 
 const Navigation = () => {
     const angleIncrement = 360 / BtnList.length;
