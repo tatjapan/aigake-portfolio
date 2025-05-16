@@ -1,0 +1,51 @@
+export type WorkItem = {
+  id: number;
+  src: string;
+  alt: string;
+  title: string;
+};
+
+export const workData: WorkItem[] = [
+  { id: 1, src: '/works/100 yuri1.1.webp', alt: '100 百合 ', title: '100 百合 ' },
+  { id: 2, src: '/works/;q2.webp', alt: ';q', title: ';q' },
+  { id: 3, src: '/works/aiaigasa1.webp', alt: '相合傘 1', title: '相合傘 1' },
+  { id: 4, src: '/works/arm hug1.webp', alt: '腕を組む 1', title: '腕を組む 1' },
+  { id: 5, src: '/works/basketball.webp', alt: 'バスケットボール', title: 'バスケットボール' },
+  { id: 6, src: '/works/camera1.webp', alt: 'カメラ 1', title: 'カメラ 1' },
+  { id: 7, src: '/works/casino2.webp', alt: 'カジノ 2', title: 'カジノ 2' },
+  { id: 8, src: '/works/cat pose1.webp', alt: '猫のポーズ 1', title: '猫のポーズ 1' },
+  { id: 9, src: '/works/cherryblossom2.webp', alt: '桜 2', title: '桜 2' },
+  { id: 10, src: '/works/choco2.webp', alt: 'チョコレート 2', title: 'チョコレート 2' },
+  { id: 11, src: '/works/cny.webp', alt: 'Cny', title: 'Cny' },
+  { id: 12, src: '/works/coral1.webp', alt: 'Coral 1', title: 'Coral 1' },
+  { id: 13, src: '/works/corne1.webp', alt: 'Corne 1', title: 'Corne 1' },
+  { id: 14, src: '/works/dance yuri1.1.webp', alt: 'Dance 百合 1. 1', title: 'Dance 百合 1. 1' },
+  { id: 15, src: '/works/desney1.webp', alt: 'Desney 1', title: 'Desney 1' },
+  { id: 16, src: '/works/effele1.webp', alt: 'Effele 1', title: 'Effele 1' },
+  { id: 17, src: '/works/haircut1.webp', alt: 'Haircut 1', title: 'Haircut 1' },
+  { id: 18, src: '/works/headphone.webp', alt: 'Headphone', title: 'Headphone' },
+  { id: 19, src: '/works/ice1.webp', alt: 'Ice 1', title: 'Ice 1' },
+  { id: 20, src: '/works/jump.webp', alt: 'Jump', title: 'Jump' },
+  { id: 21, src: '/works/kafun1.webp', alt: 'Kafun 1', title: 'Kafun 1' },
+  { id: 22, src: '/works/maid neko.webp', alt: 'Maid neko', title: 'Maid neko' },
+  { id: 23, src: '/works/mame3.webp', alt: 'Mame 3', title: 'Mame 3' },
+  { id: 24, src: '/works/motorcycle.webp', alt: 'Motorcycle', title: 'Motorcycle' },
+  { id: 25, src: '/works/movie yuri.webp', alt: 'Movie 百合', title: 'Movie 百合' },
+  { id: 26, src: '/works/oiwai1.webp', alt: 'Oiwai 1', title: 'Oiwai 1' },
+  { id: 27, src: '/works/olive1.webp', alt: 'Olive 1', title: 'Olive 1' },
+  { id: 28, src: '/works/online.webp', alt: 'Online', title: 'Online' },
+  { id: 29, src: '/works/panda1.webp', alt: 'Panda 1', title: 'Panda 1' },
+  { id: 30, src: '/works/piano2.webp', alt: 'Piano 2', title: 'Piano 2' },
+  { id: 31, src: '/works/ponytail.webp', alt: 'Ponytail', title: 'Ponytail' },
+  { id: 32, src: '/works/princess carry.webp', alt: 'Princess carry', title: 'Princess carry' },
+  { id: 33, src: '/works/shopping.webp', alt: 'Shopping', title: 'Shopping' },
+  { id: 34, src: '/works/snow park1.webp', alt: 'Snow park 1', title: 'Snow park 1' },
+  { id: 35, src: '/works/snowboard1.webp', alt: 'Snowboard 1', title: 'Snowboard 1' },
+  { id: 36, src: '/works/sotsugyo1.webp', alt: 'Sotsugyo 1', title: 'Sotsugyo 1' },
+  { id: 37, src: '/works/starlight.webp', alt: 'Starlight', title: 'Starlight' },
+  { id: 38, src: '/works/tetsu1.webp', alt: 'Tetsu 1', title: 'Tetsu 1' },
+  { id: 39, src: '/works/valentine6.webp', alt: 'Valentine 6', title: 'Valentine 6' },
+  { id: 40, src: '/works/water.webp', alt: 'Water', title: 'Water' },
+  { id: 41, src: '/works/y2k.webp', alt: 'Y2k', title: 'Y2k' },
+  { id: 42, src: '/works/yoga.webp', alt: 'Yoga', title: 'Yoga' },
+];

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import bg from "../public/background/home-background.png"
-import ft from "../public/background/front.png"
+import bg from "../public/background/home-background.webp"
+import ft from "../public/background/top.webp"
 import Navigation from "@/components/Navigation";
 
 export default function Home() {

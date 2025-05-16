@@ -1,11 +1,11 @@
-type BtnList = {
+export type BtnItem = {
     label: string;
     link: string;
     icon: string;
     newTab: boolean;
 
 }
-export const BtnList = [
+export const BtnList: BtnItem[] = [
     { label: "Home", link: "/", icon: "home", newTab: false },
     { label: "About", link: "/about", icon: "about", newTab: false },
     { label: "Works", link: "/works", icon: "works", newTab: false },
