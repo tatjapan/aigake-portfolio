@@ -1,6 +1,7 @@
 import Image from "next/image";
 import bg from "../../public/background/home-background.webp"
 import WorkList from "@/components/works/WorkList";
+import HomeBtn from "@/components/HomeBtn";
 
 
 export default function Works() {
@@ -16,6 +17,7 @@ export default function Works() {
                     className="object-cover object-center opacity-50"
                 />
             </div>
+            <HomeBtn />
             <WorkList />
         </main>
     );
