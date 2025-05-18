@@ -51,8 +51,8 @@
   }
   .bg-firefly-radial {
     background-color: rgba(254, 254, 91, 0.2);
-    background-image: radial-gradient(50% 50% at 50% 50%, rgba(253,255,80,0.5) 0%, rgba(217,217,217,0),0,100%);
-  } 
+    background-image: radial-gradient(50% 50% at 50% 50%, rgba(253, 255, 80, 0.5) 0%, rgba(217, 217, 217, 0) 100%);
+  }
 }
 
 @keyframes spin-reverse {
@@ -66,9 +66,11 @@
 
 @keyframes move {
   0% {
-    transform: translate(0,0);
+    transform: translate(0, 0);
+    opacity: 0.2;
   }
   100%{
-    transform: translate(100px,100px);
+    transform: translate(50px, -50px);
+    opacity: 1;
   }
 }

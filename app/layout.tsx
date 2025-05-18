@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import clsx from "clsx";
-import FireFliesBackground from "@/components/FireFliesBackground";
+import ClientOnlyFireFlies from "@/components/ClientOnlyFireFlies";
+
 
 const inter = Inter({
   variable: "--font-inter",
@@ -25,7 +26,7 @@ export default function RootLayout({
         className={clsx(inter.variable, "bg-background text-foreground font-inter")}
       >
         {children}
-        <FireFliesBackground />
+        <ClientOnlyFireFlies />
       </body>
     </html>
   );

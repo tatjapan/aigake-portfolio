@@ -26,6 +26,7 @@ const Lightbox = ({ images, currentIndex, onClose, onNavigate }: Props) => {
                     alt={item.alt}
                     width={1000}
                     height={1000}
+                    loading="lazy"
                     className='rounded-lg shadow-lg object-contain w-full h-auto'
                 />
                 <div className='text-white mt-2'>{item.title}</div>
