@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo, useMemo } from 'react'
 
 type Firefly = {
     id: number;
@@ -8,6 +8,8 @@ type Firefly = {
     animationDuration: string;
 };
 
+const MAX_FIREFLIES = 20;
+
 const createFirefly = (): Firefly => ({
     id: Math.random(),
     top: `${Math.random() * 100}%`,
@@ -15,38 +17,49 @@ const createFirefly = (): Firefly => ({
     animationDuration: `${Math.random() * 5 + 5}s`,
 })
 
+// Firefly 個別のメモ化コンポーネント
+const FirelryDot = memo(({ firefly }: { firefly: Firefly }) => {
+    return (
+        <div
+            className='absolute rounded-full w-[10px] h-[10px] bg-firefly-radial'
+            style={
+                {
+                    top: firefly.top,
+                    left: firefly.left,
+                    animation: `move ${firefly.animationDuration} infinite alternate`
+                }
+            }
+        />
+    )
+})
+
+FirelryDot.displayName = 'FireflyDot'
+
 const FireFliesBackground = () => {
     const [fireflies, setFireflies] = useState<Firefly[]>([]);
 
     useEffect(() => {
-        const addFireflyPeriodically = () => {
-            const newFirefly = createFirefly();
-            setFireflies(currentFireflies => [
-                ...currentFireflies.slice(-14),
-                newFirefly
-            ])
-        };
-        const interval = setInterval(addFireflyPeriodically, 1000);
+        const interval = setInterval(() => {
+            setFireflies(prev => {
+                const next = [...prev, createFirefly()];
+                return next.slice(-MAX_FIREFLIES);
+            })
+        }, 1200);
 
         return () => clearInterval(interval);
     }, []);
 
+    // 再レンダリングを防ぐ useMemo
+    const renderedFireflies = useMemo(() => (
+        fireflies.map(firefly => (
+            <FirelryDot key={firefly.id} firefly={firefly} />))
+    ), [fireflies])
 
     return (
-        <div className='fixed top-0 left-0 w-full h-full -z-10 overflow-hidden'>
-            {fireflies.map((firefly) => {
-                return <div key={firefly.id} className='absolute rounded-full w-[10px] h-[10px] bg-firefly-radial'
-                    style={
-                        {
-                            top: firefly.top,
-                            left: firefly.left,
-                            animation: `move ${firefly.animationDuration} infinite alternate`
-                        }
-                    }
-                ></div>
-            })}
+        <div className='fixed top-0 left-0 w-full h-full -z-10 overflow-hidden pointer-events-none motion-reduce:hidden'>
+            {renderedFireflies}
         </div>
     )
 }
 
-export default FireFliesBackground
+export default memo(FireFliesBackground)

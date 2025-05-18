@@ -1,53 +1,63 @@
 'use client'
-import { workData } from '@/app/workData';
-import { useState } from 'react';
-import Image from 'next/image'
-import Lightbox from './Lightbox';
+import React, { useCallback, useMemo, useState } from 'react';
+import WorkListItem from './WorkListItem';
+import type { WorkItem } from '@/app/workData'
+import dynamic from 'next/dynamic';
+
+
+type Props = {
+    works: WorkItem[]
+}
 
 const ITEMS_PER_PAGE = 9;
 
+// 遅延読み込み（クライアント専用）
+const Lightbox = dynamic(() => import('./Lightbox'), {
+    ssr: false,
+    loading: () => <div className="text-white text-center">Loading...</div>,
+});
 
-const WorkList = () => {
+
+const WorkList = ({ works }: Props) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
-    const handleNavigate = (direction: 'prev' | 'next') => {
-        if (selectedIndex === null) return;
-        const newIndex =
-            direction === 'prev'
-                ? Math.max(0, selectedIndex - 1)
-                : Math.min(workData.length - 1, selectedIndex + 1);
-        setSelectedIndex(newIndex);
-    };
-
-
     const startIdx = (currentPage - 1) * ITEMS_PER_PAGE;
-    const currentImages = workData.slice(startIdx, startIdx + ITEMS_PER_PAGE);
-    const totalPages = Math.ceil(workData.length / ITEMS_PER_PAGE);
+    const pagenatedWorks = useMemo(
+        () => works.slice(startIdx, startIdx + ITEMS_PER_PAGE),
+        [works, startIdx]
+    );
+
+    const handleNavigate = useCallback((direction: 'prev' | 'next') => {
+        setSelectedIndex((prev) => {
+            if (prev === null) return null;
+            if (direction === 'prev') return Math.max(0, prev - 1);
+            if (direction === 'next') return Math.min(works.length - 1, prev + 1);
+            return prev;
+        });
+    }, [works.length]);
+
+    const handleClick = useCallback((idx: number) => {
+        setSelectedIndex(startIdx + idx);//全体のインデックスを渡す
+    }, [startIdx]);
+
+    const handleClose = () => setSelectedIndex(null);
+
+    const totalPages = Math.ceil(works.length / ITEMS_PER_PAGE);
 
     return (
         <div className='max-w-6xl w-full px-4 py-12'>
             <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4'>
-                {currentImages.map((img, idx) => {
-                    const globalIndex = (currentPage - 1) * ITEMS_PER_PAGE + idx;
-                    return (
-                        <div
-                            key={img.id}
-                            className='relative aspect-square cursor-pointer overflow-hidden rounded shadow'
-                            onClick={() => setSelectedIndex(globalIndex)}
-                        >
-                            <Image
-                                src={img.src}
-                                alt={img.alt}
-                                fill
-                                className='object-cover hover:scale-105 transition-transform duration-300'
-                            />
-                        </div>
-                    )
-                }
-
-                )}
+                {pagenatedWorks.map((work, idx) => (
+                    <WorkListItem
+                        key={work.id}
+                        work={work}
+                        index={idx}
+                        onClick={handleClick}
+                    />))}
             </div>
+
+            {/* Pagination */}
             <div className='flex justify-center mt-6 space-x-2'>
                 {Array.from({ length: totalPages }, (_, i) => (
                     <button
@@ -61,12 +71,13 @@ const WorkList = () => {
                     </button>
                 ))}
             </div>
+            {/* Lightbox */}
             {selectedIndex !== null && (
                 <Lightbox
-                    images={workData}
+                    images={works}
                     currentIndex={selectedIndex}
-                    onClose={() => setSelectedIndex(null)}
                     onNavigate={handleNavigate}
+                    onClose={handleClose}
                 />
             )}
         </div>

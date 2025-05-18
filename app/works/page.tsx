@@ -2,6 +2,7 @@ import Image from "next/image";
 import bg from "../../public/background/home-background.webp"
 import WorkList from "@/components/works/WorkList";
 import HomeBtn from "@/components/HomeBtn";
+import { workData } from '@/app/workData';
 
 
 export default function Works() {
@@ -18,7 +19,7 @@ export default function Works() {
                 />
             </div>
             <HomeBtn />
-            <WorkList />
+            <WorkList works={workData} />
         </main>
     );
 }
